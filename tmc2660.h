@@ -1,7 +1,7 @@
 /*
  * tmc2660.h - register and message (datagram) descriptors for Trinamic TMC2660 stepper driver
  *
- * v0.0.2 / 2025-02-07
+ * v0.0.3 / 2025-10-08
  */
 
 /*
@@ -101,16 +101,24 @@ typedef enum {
 
 // end of default values
 
-typedef uint8_t tmc2660_regaddr_t;
 
 //adresses are 3 bits.
+#ifdef __cplusplus
+typedef enum {
+#else
+typedef uint8_t tmc2660_regaddr_t;
 enum tmc2660_regaddr_t {
+#endif
     TMC2660Reg_DRVCTRL  = 0b000, // only ever going to use step/dir mode.
     TMC2660Reg_CHOPCONF = 0b100,
     TMC2660Reg_SMARTEN  = 0b101, // Coolstep control register.
     TMC2660Reg_SGCSCONF = 0b110, // Stallguard2 control register.
     TMC2660Reg_DRVCONF  = 0b111  // Driver Control Register.
-};
+}
+#ifdef __cplusplus
+    tmc2660_regaddr_t
+#endif
+;
 
 typedef enum {
     TMC2660_RDSEL0 = 0,

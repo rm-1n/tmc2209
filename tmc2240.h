@@ -1,7 +1,7 @@
 /*
  * tmc2240.h - register and message (datagram) descriptors for Trinamic TMC2240 stepper driver
  *
- * v0.0.1 / 2025-06-08
+ * v0.0.2 / 2025-10-08
  */
 
 /*
@@ -188,9 +188,12 @@ typedef enum {
 #define TMC2240_EN_PWM_MODE   0
 #endif
 
+#ifdef __cplusplus
+typedef enum {
+#else
 typedef uint8_t tmc2240_regaddr_t;
-
 enum tmc2240_regaddr_t {
+#endif
     TMC2240Reg_GCONF            = 0x00,
     TMC2240Reg_GSTAT            = 0x01,
     TMC2240Reg_IFCNT            = 0x02,
@@ -235,7 +238,11 @@ enum tmc2240_regaddr_t {
     TMC2240Reg_SG4_THRS         = 0x74,
     TMC2240Reg_SG4_RESULT       = 0x75,
     TMC2240Reg_SG4_IND          = 0x76,
-};
+}
+#ifdef __cplusplus
+    tmc2240_regaddr_t
+#endif
+;
 
 typedef union {
     uint8_t value;

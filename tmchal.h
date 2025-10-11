@@ -1,7 +1,7 @@
 /*
  * tmchal.h - HAL interface for Trinamic stepper drivers
  *
- * v0.0.9 / 2025-06-08
+ * v0.0.10 / 2025-10-08
  */
 
 /*
@@ -182,6 +182,6 @@ typedef struct {
 } tmchal_t;
 
 static const tmchal_t tmc_null_driver = {
-    .driver = TMCNULL,
     .name = "null",
+    .driver = TMCNULL
 };

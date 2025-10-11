@@ -1,12 +1,12 @@
 /*
  * tmc2130.h - register and message (datagram) descriptors for Trinamic TMC2130 stepper driver
  *
- * v0.0.9 / 2024-09-28
+ * v0.0.10 / 2025-10-08
  */
 
 /*
 
-Copyright (c) 2018-2024, Terje Io
+Copyright (c) 2018-2025, Terje Io
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -117,9 +117,12 @@ typedef enum {
 #define TMC2130_EN_PWM_MODE   0
 #endif
 
+#ifdef __cplusplus
+typedef enum {
+#else
 typedef uint8_t tmc2130_regaddr_t;
-
 enum tmc2130_regaddr_t {
+#endif
     TMC2130Reg_GCONF        = 0x00,
     TMC2130Reg_GSTAT        = 0x01,
     TMC2130Reg_IOIN         = 0x04,
@@ -144,7 +147,11 @@ enum tmc2130_regaddr_t {
     TMC2130Reg_PWM_SCALE    = 0x71,
     TMC2130Reg_ENCM_CTRL    = 0x72,
     TMC2130Reg_LOST_STEPS   = 0x73,
-};
+}
+#ifdef __cplusplus
+    tmc2130_regaddr_t
+#endif
+;
 
 typedef union {
     uint8_t value;

@@ -1,12 +1,12 @@
 /*
  * tmc5160.h - register and message (datagram) descriptors for Trinamic TMC5160 stepper driver
  *
- * v0.0.7 / 2024-11-16
+ * v0.0.8 / 2025-10-08
  */
 
 /*
 
-Copyright (c) 2021-2024, Terje Io
+Copyright (c) 2021-2025, Terje Io
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -119,9 +119,12 @@ typedef enum {
 #define TMC5160_EN_PWM_MODE   0
 #endif
 
+#ifdef __cplusplus
+typedef enum {
+#else
 typedef uint8_t tmc5160_regaddr_t;
-
 enum tmc5160_regaddr_t {
+#endif
     TMC5160Reg_GCONF            = 0x00,
     TMC5160Reg_GSTAT            = 0x01,
     TMC5160Reg_IFCNT            = 0x02,
@@ -165,7 +168,11 @@ enum tmc5160_regaddr_t {
     TMC5160Reg_PWM_SCALE        = 0x71,
     TMC5160Reg_PWM_AUTO         = 0x72,
     TMC5160Reg_LOST_STEPS       = 0x73,
-};
+}
+#ifdef __cplusplus
+    tmc5160_regaddr_t
+#endif
+;
 
 typedef union {
     uint8_t value;

@@ -1,12 +1,12 @@
 /*
  * tmc2209.h - register and message (datagram) descriptors for Trinamic TMC2209 stepper driver
  *
- * v0.0.8 / 2024-11-16
+ * v0.0.9 / 2025-10-08
  */
 
 /*
 
-Copyright (c) 2020-2024, Terje Io
+Copyright (c) 2020-2025, Terje Io
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -115,9 +115,12 @@ typedef enum {
 #define TMC2209_SPREADCYCLE   0
 #endif
 
+#ifdef __cplusplus
+typedef enum {
+#else
 typedef uint8_t tmc2209_regaddr_t;
-
 enum tmc2209_regaddr_t {
+#endif
     TMC2209Reg_GCONF        = 0x00,
     TMC2209Reg_GSTAT        = 0x01,
     TMC2209Reg_IFCNT        = 0x02,
@@ -145,7 +148,11 @@ enum tmc2209_regaddr_t {
     TMC2209Reg_PWM_SCALE    = 0x71,
     TMC2209Reg_PWM_AUTO     = 0x72,
     TMC2209Reg_LAST_ADDR    = TMC2209Reg_PWM_AUTO
-};
+}
+#ifdef __cplusplus
+    tmc2209_regaddr_t
+#endif
+;
 
 typedef union {
     uint8_t value;
