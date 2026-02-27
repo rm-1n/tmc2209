@@ -39,8 +39,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdlib.h>
 #include <string.h>
 
-#include "grbl/hal.h"
-
 #include "tmc2209.h"
 #include "tmchal.h"
 
@@ -354,25 +352,25 @@ static const tmchal_t tmc_hal = {
     .write_register = write_register
 };
 
-const tmchal_t *TMC2209_AddMotor (motor_map_t motor, uint8_t address, uint16_t current, uint8_t microsteps, uint8_t r_sense)
-{
-    bool ok = !!tmcdriver[motor.id];
+// const tmchal_t *TMC2209_AddMotor (motor_map_t motor, uint8_t address, uint16_t current, uint8_t microsteps, uint8_t r_sense)
+// {
+//     bool ok = !!tmcdriver[motor.id];
 
-    if(ok || (ok = (tmcdriver[motor.id] = malloc(sizeof(TMC2209_t))) != NULL)) {
-        TMC2209_SetDefaults(tmcdriver[motor.id]);
-        tmcdriver[motor.id]->config.motor.id = motor.id;
-        tmcdriver[motor.id]->config.motor.address = address;
-        tmcdriver[motor.id]->config.motor.axis = motor.axis;
-        tmcdriver[motor.id]->config.current = current;
-        tmcdriver[motor.id]->config.microsteps = microsteps;
-        tmcdriver[motor.id]->config.r_sense = r_sense;
-        tmcdriver[motor.id]->chopconf.reg.mres = tmc_microsteps_to_mres(microsteps);
-    }
+//     if(ok || (ok = (tmcdriver[motor.id] = malloc(sizeof(TMC2209_t))) != NULL)) {
+//         TMC2209_SetDefaults(tmcdriver[motor.id]);
+//         tmcdriver[motor.id]->config.motor.id = motor.id;
+//         tmcdriver[motor.id]->config.motor.address = address;
+//         tmcdriver[motor.id]->config.motor.axis = motor.axis;
+//         tmcdriver[motor.id]->config.current = current;
+//         tmcdriver[motor.id]->config.microsteps = microsteps;
+//         tmcdriver[motor.id]->config.r_sense = r_sense;
+//         tmcdriver[motor.id]->chopconf.reg.mres = tmc_microsteps_to_mres(microsteps);
+//     }
 
-    if(ok && !(ok = TMC2209_Init(tmcdriver[motor.id]))) {
-        free(tmcdriver[motor.id]);
-        tmcdriver[motor.id] = NULL;
-    }
+//     if(ok && !(ok = TMC2209_Init(tmcdriver[motor.id]))) {
+//         free(tmcdriver[motor.id]);
+//         tmcdriver[motor.id] = NULL;
+//     }
 
-    return ok ? &tmc_hal : NULL;
-}
+//     return ok ? &tmc_hal : NULL;
+// }

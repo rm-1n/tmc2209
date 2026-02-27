@@ -46,6 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 
 #include "tmc2209.h"
+#include <stdio.h>
 
 static const trinamic_cfg_params_t cfg_params = {
 
@@ -330,13 +331,13 @@ bool TMC2209_ReadRegister (TMC2209_t *driver, TMC2209_datagram_t *reg)
     datagram.msg.slave = driver->config.motor.address;
     datagram.msg.addr.value = reg->addr.value;
     datagram.msg.addr.write = 0;
-    tmc_crc8(datagram.data, sizeof(TMC_uart_read_datagram_t));
+    tmc_crc8(datagram.data, sizeof(datagram.data));
 
     res = tmc_uart_read(driver->config.motor, &datagram);
 
     if(res->msg.slave == 0xFF && res->msg.addr.value == datagram.msg.addr.value) {
         uint8_t crc = res->msg.crc;
-        tmc_crc8(res->data, sizeof(TMC_uart_write_datagram_t));
+        tmc_crc8(res->data, sizeof(res->data));
         if((ok = crc == res->msg.crc)) {
             reg->payload.value = res->msg.payload.value;
             tmc_byteswap(reg->payload.data);
