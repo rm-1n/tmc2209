@@ -4,7 +4,8 @@
 
 #include <stdint.h>
 
-#define SERIAL_BAUD 19200
+// when using serial baud 9600 + 19200 a pullup from uart gpio to 3.3V was necessary
+#define SERIAL_BAUD 115200
 // ensure the last byte finishes transmitting (start + 8 data + stop = 10 bits)
 // compute bit time in microseconds and wait one byte time plus margin
 #define WAIT_BITS_PER_FRAME 10
