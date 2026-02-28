@@ -11,4 +11,5 @@ This library is used by some [grblHAL](https://github.com/grblHAL) drivers and e
 A [SPI <> I2C](https://github.com/terjeio/Trinamic_TMC2130_I2C_SPI_Bridge) bridge implemented on a TI MSP430G2553 processor that may be used for systems with limited IO capabilities.
 
 ---
-2025-10-11
+2026-02-28: added support for single pin UART based on raspberry pi pico PIO. 
+All added functionality based on raspberrypi example's UART pio implementation (plus some State Machine switching).
