@@ -4,12 +4,20 @@
 
 #include <stdint.h>
 
+#define SERIAL_BAUD 9600
+// ensure the last byte finishes transmitting (start + 8 data + stop = 10 bits)
+// compute bit time in microseconds and wait one byte time plus margin
+#define WAIT_BITS_PER_FRAME 10
+#define BIT_TIME_US (1000000 / SERIAL_BAUD)
+#define WAIT_TIME_PER_FRAME_US (WAIT_BITS_PER_FRAME * BIT_TIME_US)
+
 // Initialise pio-uart on given GPIO (shim -> initialises onewire)
 void pio_uart_init(uint32_t gpio_pin);
 
 // Send len bytes from buf
 void pio_uart_send(const uint8_t *buf, int len);
 
-// Receive len bytes into buf (blocking)
-void pio_uart_recv(uint8_t *buf, int len);
+// Receive up to len bytes into buf. Returns number of bytes read (may be 0 on timeout).
+// timeout_us: maximum time in microseconds to wait per byte.
+int pio_uart_recv(uint8_t *buf, int len, uint32_t timeout_us);
 #endif

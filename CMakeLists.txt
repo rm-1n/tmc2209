@@ -16,7 +16,10 @@ target_sources(tmc2209 INTERFACE
 #  ${CMAKE_CURRENT_LIST_DIR}/tmc5160hal.c
 )
 
-target_include_directories(tmc2209 INTERFACE ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(tmc2209 INTERFACE 
+    ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_CURRENT_LIST_DIR}/pio-uart
+)
 
 # Using pio-uart shim (bit-banged or PIO implementation)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/pio-uart)
