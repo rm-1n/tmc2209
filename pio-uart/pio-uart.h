@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#define SERIAL_BAUD 9600
+#define SERIAL_BAUD 19200
 // ensure the last byte finishes transmitting (start + 8 data + stop = 10 bits)
 // compute bit time in microseconds and wait one byte time plus margin
 #define WAIT_BITS_PER_FRAME 10
