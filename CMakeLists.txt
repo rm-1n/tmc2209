@@ -21,6 +21,6 @@ target_include_directories(pico_tmc2209 INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/pio-uart
 )
 
-# Using pio-uart shim (bit-banged or PIO implementation)
+# add pio based single wire uart
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/pio-uart)
 target_link_libraries(pico_tmc2209 INTERFACE pio_sw_uart)
